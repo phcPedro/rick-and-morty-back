@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://apirickandmortyphc.onrender.com",
+      "url": "https://apirickandmortyphc.onrender.com/api",
       "description": "API de produção RENDER"
     },
     {

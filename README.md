@@ -12,5 +12,7 @@ EXPRESS
 
 Documentação feita no Swagger.
 
+deploy no render: https://apirickandmortyphc.onrender.com/api/api-docs 🌎
+
 
 By Pedro Henrique Câmara. Phc@

@@ -11,12 +11,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api",
-      "description": "API de teste"
+      "url": "https://apirickandmortyphc.onrender.com",
+      "description": "API de produção RENDER"
     },
     {
-      "url": "https://api-elgeladon.herokuapp.com/paletas",
-      "description": "API de produção"
+     "url": "http://localhost:3000/api",
+      "description": "API de teste"
     }
   ],
   "paths": {

@@ -6,8 +6,8 @@ Irei anexar ao front em um diretorio separado.
 Api utilizando o modelo de CRUD.
 
 Tecnologias usadas:
-MONGODB
-NODEJS
+MONGODB,
+NODEJS,
 EXPRESS
 
 Documentação feita no Swagger.

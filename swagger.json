@@ -88,7 +88,7 @@
                 "$ref": "#/components/schemas/Character"
               },
               "examples": {
-                "Paletas": {
+                "Personagem": {
                   "value": {
                     "name": "Testicle Monster Dimension",
                     "image": "https://rickandmortyapi.com/api/location/21"
@@ -136,7 +136,7 @@
                 "$ref": "#/components/schemas/Character"
               },
               "examples": {
-                "Paletas": {
+                "Personagem": {
                   "value": {
                     "name": "Testicle Monster Dimension",
                     "image": "https://rickandmortyapi.com/api/character/avatar/7.jpeg"

@@ -1,0 +1,206 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API do Rick and Morty",
+    "description": "API para CRUD dos personagens do Ryck and Morty",
+    "termsOfService": "",
+    "contact": {
+      "email": "pedroohenrique.pedro@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "API de teste"
+    },
+    {
+      "url": "https://api-elgeladon.herokuapp.com/paletas",
+      "description": "API de produção"
+    }
+  ],
+  "paths": {
+    "/all-api": {
+      "get": {
+        "summary": "Lista de todos os personagens",
+        "description": "Rota responsável por listar todos os personagens",
+        "tags": ["Personagem"],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "summary": "Busca um personagem pelo ID",
+        "description": "Rota responsável por buscar um unico personagem pelo ID",
+        "tags": ["Personagem"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Personagem",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/creat": {
+      "post": {
+        "summary": "Cadastrar um Personagem",
+        "description": "Rota responsável por cadastrar um Personagem",
+        "tags": ["Personagem"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Character"
+              },
+              "examples": {
+                "Paletas": {
+                  "value": {
+                    "name": "Testicle Monster Dimension",
+                    "image": "https://rickandmortyapi.com/api/location/21"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update/{id}": {
+      "put": {
+        "summary": "Editar um personagem pelo ID",
+        "description": "Rota responsável por editar uma personagem pelo ID",
+        "tags": ["Personagem"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Personagem",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Character"
+              },
+              "examples": {
+                "Paletas": {
+                  "value": {
+                    "name": "Testicle Monster Dimension",
+                    "image": "https://rickandmortyapi.com/api/character/avatar/7.jpeg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete/{id}": {
+      "delete": {
+        "summary": "Apagar um Personagem pelo id",
+        "description": "Rota responsável por excluir um personagem pelo id",
+        "tags": ["Personagem"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do personagem para exclusão",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Character": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "imagem": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

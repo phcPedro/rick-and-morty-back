@@ -1,6 +1,7 @@
 # rick-and-morty-back
 
-BackAnd da API Rick and Morty. Api feita para alimentar o front end de uma API do rick and Morty. Irei anexar ao front em um diretorio separado.
+BackAnd da API Rick and Morty. Api feita para alimentar o front end um site que armazena em memoria persistente os personagens do rick and Morty. 
+Irei anexar ao front em um diretorio separado.
 
 Api utilizando o modelo de CRUD.
 

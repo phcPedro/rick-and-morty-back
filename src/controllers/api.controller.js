@@ -3,7 +3,9 @@ const apiService = require('../services/api.service');
 
 const findAllApi = async(req,res) =>{
     const allApi = await apiService.findAllApiService();
-   
+    if(allApi.length == 0){
+        res.status(404).send({message:`Não existem personagens cadastrados!`});
+    }
     res.send(allApi);
 };
 

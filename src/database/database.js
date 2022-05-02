@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const connecteTodatabase = () => {
   mongoose
-    .connect('mongodb://localhost:27017/Rick-and-Mory', {
+    .connect(process.env.URI_DATABASE, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    .then(() => console.log('Conectado ao MONGODB!'))
+    .then(() => console.log('Conectado ao MONGODB Atlas!'))
     .catch((error) =>
       console.log(
         `Erro, não foi possivel conectar com o MongoDB, error ${error}`,

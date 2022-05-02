@@ -14,7 +14,7 @@ const validId = (req, res, next)=>{
 const existID = async (req,res,next) =>{
  const exist = await apiService.findApiByIdService(req.params.id);
   if(!exist){
-    return res.status(404).send({message:`Esse id não existe!`});
+    return res.status(404).send({message:`ID inexistente!`});
   }
   next();
  }

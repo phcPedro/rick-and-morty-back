@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://api-rickandmorty-backand-m03.onrender.com",
+      "url": "https://phcbackendblue.onrender.com/api-docs/",
       "description": "API de produção"
     },
     {

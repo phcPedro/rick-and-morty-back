@@ -1,9 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API do Rick and Morty",
-    "description": "API para CRUD dos personagens do Ryck and Morty",
-    "termsOfService": "",
+    "title": "API Rick and Morty",
+    "description": "API para CRUD de personagens da animação Rick and Morty",
     "contact": {
       "email": "pedroohenrique.pedro@gmail.com"
     },
@@ -11,32 +10,56 @@
   },
   "servers": [
     {
-      "url": "https://apirickandmortyphc.onrender.com/",
-      "description": "API de produção RENDER"
+      "url": "https://api-rickandmorty-backand-m03.onrender.com",
+      "description": "API de produção"
     },
     {
-     "url": "http://localhost:3000/",
+      "url": "http://localhost:3000/",
       "description": "API de teste"
     }
-  
   ],
   "paths": {
-    "/login": {
+    "/allusers": {
+      "get": {
+        "summary": "Lista de todos os usuários",
+        "description": "Rota responsável por listar todos os usuários",
+        "tags": ["Users"],        
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/creat-user": {
       "post": {
-        "summary": "Realizar Login",
-        "description": "Rota para Login de usuario",
-        "tags": ["Auth"],
+        "summary": "Cadastrar Usuário",
+        "description": "Rota responsável por cadastrar um usuário",
+        "tags": ["Users"],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/User"
               },
               "examples": {
-                "User": {
+                "Usuário": {
                   "value": {
-                    "email": "pedro@gmail.com",
+                    "name": "Rick Sanche",
+                    "username": "rickexample",
+                    "email": "example@example.com",
                     "password": "12345"
+                  
                   }
                 }
               }
@@ -44,9 +67,6 @@
           }
         },
         "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
           "400": {
             "description": "Bad Request"
           },
@@ -56,89 +76,263 @@
               "application/json": {
                 "schema": {
                   "type": "object"
-                  }
                 }
               }
             }
-           }
-      } 
-          },
-     "/allusers": {
-        "get": {
-          "summary": "Lista de todos os usuários",
-          "description": "Rota responsável por listar todos os usuários",
-          "tags": ["Users"],
-          "responses": {
-            "401": {
-              "description": "Unauthorized"
-            },
-            "404": {
-              "description": "Not Found"
-            },
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                        "schema": {
-                        "type": "array"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "/creat-user": {
-            "post": {
-              "summary": "Cadastrar Usuário",
-              "description": "Rota para cadastro de usuario",
-              "tags": ["Users"],
-              "security": [{ "bearerAuth": [] }],
-              "requestBody": {
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object"
-                    },
-                    "examples": {
-                      "Usuário": {
-                        "value": {
-                            
-                          "username": "example1",
-                          "name":"Example2",
-                          "email": "example@gmail.com",
-                          "password": "12345"
-                          
-                        }
-                      }
-                    }
-                  }
-                }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Realizar Login",
+        "description": "Rota responsável por logar o usuário",
+        "tags": ["LOGIN"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
               },
-              "responses": {
-                "400": {
-                  "description": "Bad Request"
-                },
-                "201": {
-                  "description": "Created",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "object"
-                        }
-                      }
-                    }
+              "examples": {
+                "User": {
+                  "value": {
+                    "email": "example@example.com",
+                    "password": "12345"
                   }
                 }
               }
-            },
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK"            
+          }
+        }
+      }
+    },
+    "/creat": {
+      "post": {
+        "summary": "Cadastrar um personagem",
+        "description": "Rota responsável por cadastrar um personagem",
+        "tags": ["Characters"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Character"
+              },
+              "examples": {
+                "Character": {
+                  "value": {
+                    "name": "Rick",
+                    "image": "https://rickandmortyapi.com/api/character/avatar/292.jpeg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/all-api": {
       "get": {
         "summary": "Lista de todos os personagens",
         "description": "Rota responsável por listar todos os personagens",
-        "tags": ["Personagem"],
+        "tags": ["Characters"],
         "security": [{ "bearerAuth": [] }],
         "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/{id}": {
+      "get": {
+        "summary": "Busca um personagem pelo ID",
+        "description": "Rota responsável por buscar um personagem pelo ID",
+        "tags": ["Characters"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do personagem para a busca",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update/{id}": {
+      "put": {
+        "summary": "Editar um personagem pelo ID",
+        "description": "Rota responsável por editar um personagem pelo ID",
+        "tags": ["Characters"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do personagem para a busca",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Character"
+              },
+              "examples": {
+                "Character": {
+                  "value": {
+                    "name": "Rick",
+                    "image": "https://rickandmortyapi.com/api/character/avatar/292.jpeg"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete/{id}": {
+      "delete": {
+        "summary": "Apagar um personagem pelo ID",
+        "description": "Rota responsável por apagar um personagem pelo ID",
+        "tags": ["Characters"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do personagem para deleção",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/search-name/{name}": {
+      "get": {
+        "summary": "Busca um personagem pelo nome",
+        "description": "Rota responsável por buscar um personagem pelo nome",
+        "tags": ["Characters"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Busca de personagens pelo nome.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -160,211 +354,18 @@
           }
         }
       }
-    },
-    "/{id}": {
-      "get": {
-        "summary": "Busca um personagem pelo ID",
-        "description": "Rota responsável por buscar um unico personagem pelo ID",
-        "tags": ["Personagem"],
-        "security": [{ "bearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Id do Personagem",
-            "required": true
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Character"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/search-name/:name": {
-      "get": {
-        "summary": "Busca um personagem pelo Nome",
-        "description": "Rota responsável por buscar um unico personagem pelo Nome",
-        "tags": ["Personagem"],
-        "security": [{ "bearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "Name",
-            "in": "path",
-            "description": "Nome do Personagem",
-            "required": true
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Character"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/creat": {
-      "post": {
-        "summary": "Cadastrar um Personagem",
-        "description": "Rota responsável por cadastrar um Personagem",
-        "tags": ["Personagem"],
-        "security": [{ "bearerAuth": [] }],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Character"
-              },
-              "examples": {
-                "Personagem": {
-                  "value": {
-                    "name": "Testicle Monster Dimension",
-                    "image": "https://rickandmortyapi.com/api/location/21"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Character"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/update/{id}": {
-      "put": {
-        "summary": "Editar um personagem pelo ID",
-        "description": "Rota responsável por editar uma personagem pelo ID",
-        "tags": ["Personagem"],
-        "security": [{ "bearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Id do Personagem",
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Character"
-              },
-              "examples": {
-                "Personagem": {
-                  "value": {
-                    "name": "Testicle Monster Dimension",
-                    "image": "https://rickandmortyapi.com/api/character/avatar/7.jpeg"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Character"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/delete/{id}": {
-      "delete": {
-        "summary": "Apagar um Personagem pelo id",
-        "description": "Rota responsável por excluir um personagem pelo id",
-        "tags": ["Personagem"],
-        "security": [{ "bearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Id do personagem para exclusão",
-            "required": true
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
-    "securitySchemas": {
-      "bearerAuth":{
-        "type":"http",
-        "scheme":"bearer",
-        "bearerFormat":"JWT"
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     },
-     "schemas":{
-       "User":{
+    "schemas": {
+      "User": {
         "type":"object",
         "properties": {
           "name": {
@@ -384,10 +385,10 @@
       "Character": {
         "type": "object",
         "properties": {
-          "nome": {
+          "name": {
             "type": "string"
           },
-          "imagem": {
+          "image": {
             "type": "string"
           }
         }
@@ -395,4 +396,3 @@
     }
   }
 }
-

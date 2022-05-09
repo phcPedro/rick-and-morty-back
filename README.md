@@ -1,18 +1,23 @@
 # rick-and-morty-back
 
 BackAnd da API Rick and Morty. Api feita para alimentar o front end de um site que armazena em memoria persistente os personagens do rick and Morty. 
-Irei anexar ao front em um diretorio separado.
 
-Api utilizando o modelo de CRUD.
+Uso simples abra o deploy no Render, link abaixo e teste as rotas que estão todas funcinonais.
+Duvidas ou ajuda para usar minha API. Entre em contato comigo pelos canais disponiveis.
+
+linkdin: https://www.linkedin.com/in/pedro-henrique-da-silva-032b3b22b
+instagram: pedrooh_camara
+
 
 Tecnologias usadas:
-MONGODB,
+MONGODB Atlas,
 NODEJS,
-EXPRESS
+EXPRESS,
+Swagger
 
 Documentação feita no Swagger.
 
-deploy no render: https://apirickandmortyphc.onrender.com/api/api-docs 🌎
+deploy no render: https://phcbackendblue.onrender.com/api-docs/ 🌎
 
 
 By Pedro Henrique Câmara. Phc@

@@ -103,11 +103,12 @@
                     "examples": {
                       "Usuário": {
                         "value": {
-                          "nameUser": "Rick Sanche",  
-                          "username": "",
-                          "email": "",
-                          "password": "",
-                          "photo": "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+                            
+                          "username": "example1",
+                          "name":"Example2",
+                          "email": "example@gmail.com",
+                          "password": "12345"
+                          
                         }
                       }
                     }

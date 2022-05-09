@@ -16,9 +16,9 @@ connecteToDatabase();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api', routes);
-app.use('/users', userRoute);
-app.use('/auth', authRoute);
+app.use('/', routes);
+app.use('/', userRoute);
+app.use('/', authRoute);
 
 app.listen(port, () =>{
     console.log(`Servidor rodando na porta ${port}`);

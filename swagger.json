@@ -18,80 +18,81 @@
      "url": "http://localhost:3000/api",
       "description": "API de teste"
     }
+  
   ],
   "paths": {
-    "/users": {
-      "get": {
-        "summary": "Lista de todos os usuários",
-        "description": "Rota responsável por listar todos os usuários",
-        "tags": ["Users"],
-        "parameters": [
-          {
-            "username": "user",
-            "in": "path",
-            "description": "User para busca",
-            "required": false
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                      "schema": {
-                      "type": "array"
+     "/allusers": {
+        "get": {
+          "summary": "Lista de todos os usuários",
+          "description": "Rota responsável por listar todos os usuários",
+          "tags": ["Users"],
+          "parameters": [
+            {
+              "username": "user",
+              "in": "path",
+              "description": "User para busca",
+              "required": false
+            }
+          ],
+          "responses": {
+            "404": {
+              "description": "Not Found"
+            },
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                        "schema": {
+                        "type": "array"
+                      }
                     }
                   }
                 }
               }
             }
-          }
-        },
-        "/users/create": {
-          "post": {
-            "summary": "Cadastrar Usuário",
-            "description": "Rota responsável por cadastrar um usuário",
-            "tags": ["Users"],
-            "requestBody": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object"
-                  },
-                  "examples": {
-                    "Usuário": {
-                      "value": {
-                        "nameUser": "Rick Sanche",  
-                        "username": "",
-                        "email": "",
-                        "password": "",
-                        "photo": "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+          },
+          "/creat-user": {
+            "post": {
+              "summary": "Cadastrar Usuário",
+              "description": "Rota para cadastro de usuario",
+              "tags": ["Users"],
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object"
+                    },
+                    "examples": {
+                      "Usuário": {
+                        "value": {
+                          "nameUser": "Rick Sanche",  
+                          "username": "",
+                          "email": "",
+                          "password": "",
+                          "photo": "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "400": {
+                  "description": "Bad Request"
+                },
+                "201": {
+                  "description": "Created",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object"
+                        }
                       }
                     }
                   }
                 }
               }
             },
-            "responses": {
-              "400": {
-                "description": "Bad Request"
-              },
-              "201": {
-                "description": "Created",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
     "/all-api": {
       "get": {
         "summary": "Lista de todos os personagens",
@@ -306,7 +307,7 @@
       }
     }
   },
-  "/auth/login": {
+  "/login": {
     "post": {
       "summary": "Realizar Login",
       "description": "Rota para Login de usuario",

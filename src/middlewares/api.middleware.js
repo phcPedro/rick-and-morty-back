@@ -3,13 +3,12 @@ const { creatApiService } = require('../services/api.service');
 const apiService = require('../services/api.service');
 
 const validId = (req, res, next)=>{
- const idParam = req.params.id;
-  if(!mongoose.Types.ObjectId.isValid(idParam)){
-   
+  if(!mongoose.Types.ObjectId.isValid(req.params.id)){
      return res.status(400).send({message:'Id do personagem invalido!'});
  }
  next();
 }
+
 
 const existID = async (req,res,next) =>{
  const exist = await apiService.findApiByIdService(req.params.id);

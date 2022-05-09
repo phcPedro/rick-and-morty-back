@@ -4,6 +4,11 @@ const findAllApiService = async ()=>{
    return await Api.find();
 };
 
+const searchApiService = async (name)=>{
+    
+    return await Api.findOne({name:name});
+}
+
 const creatApiService = async (newApi)=>{
    return await Api.create(newApi);
 };
@@ -25,5 +30,6 @@ module.exports = {
     creatApiService,
     findApiByIdService,
     updateApiService,
-    deleteApiService
+    deleteApiService,
+    searchApiService
 };

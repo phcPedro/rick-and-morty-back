@@ -6,9 +6,12 @@ const { is } = require("express/lib/request");
 
 const loginController = async (req,res) =>{
    const{email,password} = req.body;
-
    const user = await authService.loginService(email);
 
+   if(!email & !password){
+    return res.status(400).send({message:"Email and password are incorrect!"});
+   }
+   
    if(!user){
        return res.status(400).send({message: "User not found!"});
    }

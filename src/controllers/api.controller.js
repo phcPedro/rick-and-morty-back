@@ -10,24 +10,29 @@ const findAllApi = async(req,res) =>{
 };
 
 const findByIdApi = async(req,res) =>{
-    const apiId = req.params.id;
-    const choiceApi = await apiService.findApiByIdService(apiId);
-    res.send(choiceApi);
+  res.send(await apiService.findApiByIdService(req.params.id));
+};
+
+const searchApi = async(req,res)=>{
+    
+    if(!(await apiService.searchApiService(req.params.name))){
+        return res.status(404).send({message:"Character not found!"});
+    };
+    
+    res.send (await apiService.searchApiService(req.params.name));
+
 };
 
 const creatApi = async (req,res) =>{
-    const api = req.body;
-    const newApi = await apiService.creatApiService(api);
-    res.status(201).send(newApi);
-}
+    res.status(201).send(await apiService.creatApiService(req.body));
+};
 
 const updateApi = async (req, res) =>{
-  res.send(await apiService.updateApiService(req.params.id, req.body));
+  res.status(201).send(await apiService.updateApiService(req.params.id, req.body));
 };
 
 const deleteApi = async (req,res) => {
-    const apiId = req.params.id;
-    await apiService.deleteApiService(apiId);
+    await apiService.deleteApiService(req.params.id);
     res.send({message: 'Personagem excluido com sucesso!'});
 };
 
@@ -36,5 +41,6 @@ module.exports = {
     findByIdApi,
     creatApi,
     updateApi,
-    deleteApi
-}
+    deleteApi,
+    searchApi
+};

@@ -11,8 +11,8 @@ const{
     
 } = require('../middlewares/api.middleware');
 
-route.use('/api-docs', lock, swaggerUi.serve);
-route.get('/api-docs', lock, swaggerUi.setup(swaggerDocument));
+route.use('/api-docs',  swaggerUi.serve);
+route.get('/api-docs',  swaggerUi.setup(swaggerDocument));
 
 route.get('/all-api', lock, controllerApi.findAllApi);
 route.get('/id/:id', lock, validId, existID, controllerApi.findByIdApi);

@@ -3,7 +3,7 @@ const userController = require('../controllers/users.controller');
 const lock = require("../middlewares/auth.middleware")
 
 router.post("/creat-user", userController.creatUserController);
-router.get("/allusers", lock, userController.findAllUserController);
+router.get("/allusers",  userController.findAllUserController);
 
 module.exports = router;
 

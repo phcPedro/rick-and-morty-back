@@ -3,12 +3,10 @@ const userService = require("../services/users.service");
 const findAllUserController = async(req,res) =>{
     const allUsers = await userService.findAllUsers();
     if (allUsers.length == 0){
-        res.status(404).send({message:"Não existem usuarios cadastrados!"});
+        res.status(404).send({message:`Não existem usuarios cadastrados!`});
     }
     res.send(allUsers);
-}
-
-
+};
 
 const creatUserController = async(req,res) =>{
      const {username, name, password, email}= req.body;

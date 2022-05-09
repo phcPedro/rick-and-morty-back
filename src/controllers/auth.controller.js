@@ -1,3 +1,4 @@
+require("dotenv").config();
 const authService = require("../services/auth.service");
 const bcrypt = require("bcryptjs");
 const { is } = require("express/lib/request");
@@ -18,7 +19,9 @@ const loginController = async (req,res) =>{
        return res.status(400).send({message:"Invalid Password!"});
    }
 
-   res.send(user);
+   const token = authService.generateToken(user.id);
+
+   res.send({token});
 }
 
 module.exports = {loginController};

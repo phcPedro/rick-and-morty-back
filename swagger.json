@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://phcbackendblue.onrender.com/api-docs/",
+      "url": "https://phcbackendblue.onrender.com/api-docs",
       "description": "API de produção"
     },
     {
